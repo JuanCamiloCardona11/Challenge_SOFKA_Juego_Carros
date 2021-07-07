@@ -56,5 +56,4 @@ public class Vehicle {
     public String toString() {
         return ("Vehicle {" + "brand: " + brand + ", colour: " + colour + ", model: " + model + '}');
     }
-    
 }

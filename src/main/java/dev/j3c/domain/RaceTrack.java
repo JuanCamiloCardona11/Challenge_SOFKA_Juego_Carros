@@ -23,6 +23,4 @@ public class RaceTrack {
     public List<TrackLane> getListaCarriles() {
         return (this.listaCarriles);
     }
-    
-    
 }

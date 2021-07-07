@@ -16,6 +16,4 @@ public class Podium {
     public CarDriver[] getListaGanadores() {
         return (this.listaGanadores);
     }
-    
-    
 }
