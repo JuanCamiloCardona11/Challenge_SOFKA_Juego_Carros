@@ -6,14 +6,14 @@ import java.awt.Color;
 
 public class Vehicle {
     private String brand;
-    private Color colour;    
-    private int model;
+    private String colour;    
+    private String model;
     private int currentDistance;
             
     public Vehicle() {
     }
     
-    public Vehicle(String brand, Color colour, int model) {
+    public Vehicle(String brand, String colour, String model) {
         this.brand = brand;
         this.colour = colour;
         this.model = model;
@@ -32,19 +32,19 @@ public class Vehicle {
         this.brand = brand;
     }
 
-    public Color getColour() {
+    public String getColour() {
         return (this.colour);
     }
 
-    public void setColour(Color colour) {
+    public void setColour(String colour) {
         this.colour = colour;
     }
 
-    public int getModel() {
+    public String getModel() {
         return (this.model);
     }
 
-    public void setModel(int model) {
+    public void setModel(String model) {
         this.model = model;
     }
 

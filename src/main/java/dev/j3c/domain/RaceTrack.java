@@ -29,4 +29,8 @@ public class RaceTrack {
             trackLane.getCarDriver().getVehicle().goAhead();
         });
     }
+
+    public boolean juegoTerminado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

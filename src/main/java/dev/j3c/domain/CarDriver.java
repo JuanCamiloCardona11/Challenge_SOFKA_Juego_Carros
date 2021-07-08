@@ -46,9 +46,11 @@ public class CarDriver {
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
-    
+
     @Override
     public String toString() {
-        return ("CarDriver {" + "username: " + username + ", name: " + name + ", vehicle: " + vehicle + '}');
+        return "username: " + username + ", name: " + name + ", nationality: " + nationality + '}';
     }
+    
+    
 }

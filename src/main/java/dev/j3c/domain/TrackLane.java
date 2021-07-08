@@ -4,6 +4,7 @@ package dev.j3c.domain;
 public class TrackLane {
     private CarDriver carDriver;
     private int trackLaneNumber;
+    private int finalPosition;
 
     public TrackLane() {
     }
@@ -11,6 +12,7 @@ public class TrackLane {
     public TrackLane(CarDriver carDriver, int trackLaneNumber) {
         this.carDriver = carDriver;
         this.trackLaneNumber = trackLaneNumber;
+        this.finalPosition = -1;
     }
 
     public CarDriver getCarDriver() {
