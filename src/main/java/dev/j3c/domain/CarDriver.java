@@ -16,7 +16,12 @@ public class CarDriver {
         this.vehicle = vehicle;
         this.nationality = nationality;
     }
-
+    
+    public CarDriver(String name, String nationality){
+        this.name = name;
+        this.nationality = nationality;
+    }
+    
     public String getUsername() {
         return this.username;
     }
