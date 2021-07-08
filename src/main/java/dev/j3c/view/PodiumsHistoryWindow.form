@@ -45,22 +45,22 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="917" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="1055" max="-2" attributes="0"/>
                   <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="361" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="409" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="483" max="-2" attributes="0"/>
                   <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
@@ -76,7 +76,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Lista de Corredores Actuales"/>
+            <Property name="text" type="java.lang.String" value="Lista de Competiciones Anteriores"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -89,14 +89,15 @@
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="0">
-                    <Column editable="false" title="Carril Asignado" type="java.lang.Integer"/>
-                    <Column editable="false" title="Nombre de Usuario" type="java.lang.String"/>
-                    <Column editable="false" title="Nombre Completo" type="java.lang.String"/>
-                    <Column editable="false" title="Nacionalidad" type="java.lang.String"/>
-                    <Column editable="false" title="Marca del Auto" type="java.lang.String"/>
-                    <Column editable="false" title="Modelo del Auto" type="java.lang.String"/>
-                    <Column editable="false" title="Color del Auto" type="java.lang.String"/>
+                  <Table columnCount="8" rowCount="0">
+                    <Column editable="false" title="Fecha" type="java.lang.Integer"/>
+                    <Column editable="false" title="Longitud" type="java.lang.String"/>
+                    <Column editable="false" title="1er Lugar - Username" type="java.lang.String"/>
+                    <Column editable="false" title="1er Lugar - Nombre" type="java.lang.String"/>
+                    <Column editable="false" title="2do Lugar - Username" type="java.lang.String"/>
+                    <Column editable="false" title="2do Lugar - Nombre" type="java.lang.String"/>
+                    <Column editable="false" title="3er Lugar - Username" type="java.lang.String"/>
+                    <Column editable="true" title="3er Lugar - Nombre" type="java.lang.String"/>
                   </Table>
                 </Property>
               </Properties>

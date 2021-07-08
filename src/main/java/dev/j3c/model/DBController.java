@@ -2,6 +2,7 @@
 package dev.j3c.model;
 
 import dev.j3c.domain.CarDriver;
+import java.util.List;
 
 public class DBController{
 
@@ -13,7 +14,11 @@ public class DBController{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void addCarDriver(CarDriver carDriver) {
+    public boolean addCarDriver(CarDriver carDriver) {
+        return(true);
+    }
+
+    public List<CarDriver> getFullListCarDrivers() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
