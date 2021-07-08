@@ -2,20 +2,15 @@
 package dev.j3c.view;
 
 import dev.j3c.controller.GameController;
-import dev.j3c.domain.CarDriver;
-import dev.j3c.domain.Podium;
+import dev.j3c.domain.*;
 import javax.swing.JOptionPane;
-import dev.j3c.model.DBController;
-import dev.j3c.domain.RaceTrack;
-import dev.j3c.domain.TrackLane;
-import dev.j3c.domain.Vehicle;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends javax.swing.JFrame {
 
     private int gameStatus; 
-    private GameController gameController;
+    private final GameController gameController;
     
     public GameView() {
         super("CHALLENGE - JUEGO DE CARROS POR CONSOLA - Sofka U");
@@ -353,7 +348,7 @@ public class GameView extends javax.swing.JFrame {
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GameView();
+                new GameView().setVisible(true);
             }
         });
     }

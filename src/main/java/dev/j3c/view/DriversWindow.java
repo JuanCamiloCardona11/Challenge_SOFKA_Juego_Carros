@@ -20,8 +20,6 @@ public class DriversWindow extends javax.swing.JFrame {
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setLocationRelativeTo(null); 
         this.jLabelTitle.setText(title);
-        //this.jLabelTitle.setText("Lista Completa de Corredores en el sistema");
-        //this.jLabelTitle.setText("lista de corredores para la actual carrera");
     }
     
     private void setUpDriversTable(List<CarDriver> trackLanesList) {

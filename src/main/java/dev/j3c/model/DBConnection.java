@@ -13,6 +13,9 @@ public class DBConnection {
     private static final String PASSWORD = "prueba1234";
     private static Connection connBD;
     
+    public DBConnection(){
+    }
+    
     public static boolean connectBD() {
         boolean connStatusBD = false;
         try {
