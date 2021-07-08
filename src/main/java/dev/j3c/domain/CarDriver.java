@@ -2,16 +2,17 @@
 package dev.j3c.domain;
 
 public class CarDriver {
-    private String username, name;
+    private String username, name, nationality;
     private Vehicle vehicle; 
 
     public CarDriver(){
     }
 
-    public CarDriver(String username, String name, Vehicle vehicle) {
+    public CarDriver(String username, String name, Vehicle vehicle, String nationality) {
         this.username = username;
         this.name = name;
         this.vehicle = vehicle;
+        this.nationality = nationality;
     }
 
     public String getUsername() {
@@ -28,6 +29,14 @@ public class CarDriver {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNationality() {
+        return this.nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
     public Vehicle getVehicle() {
