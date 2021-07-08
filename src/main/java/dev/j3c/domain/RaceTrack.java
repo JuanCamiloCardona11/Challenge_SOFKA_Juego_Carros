@@ -23,14 +23,4 @@ public class RaceTrack {
     public List<TrackLane> getTrackLanesList() {
         return (this.trackLanesList);
     }
-
-    public void goAhead() {
-        this.trackLanesList.forEach((trackLane) -> {
-            trackLane.getCarDriver().getVehicle().goAhead();
-        });
-    }
-
-    public boolean juegoTerminado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

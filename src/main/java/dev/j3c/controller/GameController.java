@@ -1,23 +1,24 @@
 
 package dev.j3c.controller;
 
-import dev.j3c.domain.CarDriver;
-import dev.j3c.domain.Podium;
-import dev.j3c.domain.RaceTrack;
-import dev.j3c.domain.TrackLane;
-import dev.j3c.domain.Vehicle;
+import dev.j3c.domain.*;
 import dev.j3c.model.DBController;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 public class GameController {
     private RaceTrack currentRaceTrack;
     private DBController DBControl;
-
+    private Map<Integer,CarDriver> driversMapByArrival;
+    private int finalPosition; 
     //listo!
     public GameController(){
         this.DBControl = new DBController();
+        this.driversMapByArrival = new HashMap<>();
+        this.finalPosition = 0;
     }
     
     //listo!
@@ -28,6 +29,7 @@ public class GameController {
     //listo!
     public void setCurrentRaceTrack(RaceTrack newRaceTrack) {
         this.currentRaceTrack = newRaceTrack;
+        this.finalPosition = 0;
     }
     
     //listo!
@@ -122,22 +124,41 @@ public class GameController {
         return(trackLanesList);
     }
 
+    private boolean isArrivalRegistred(CarDriver theCarDriver) {
+        boolean registred = false;
+        for(Map.Entry<Integer, CarDriver> entry : this.driversMapByArrival.entrySet()) {
+            if(entry.getValue() == theCarDriver){
+                registred = true;
+                break;
+            }
+        }
+        return(registred);
+    }
+    
     //listo!
     public void goAhead() {
-        this.currentRaceTrack.goAhead();
+        this.currentRaceTrack.getTrackLanesList().forEach((trackLane) -> {
+            if(trackLane.getCarDriver().getVehicle().getCurrentDistance() < this.currentRaceTrack.getTrackLanesLength()){
+                trackLane.getCarDriver().getVehicle().goAhead();    //Si no ha terminado, avanza
+            } else if(!this.isArrivalRegistred(trackLane.getCarDriver())) {         //Si ya termino y no esta registrado, se registra la posicion de llegada.
+                this.driversMapByArrival.put(++this.finalPosition, trackLane.getCarDriver());    
+            }
+        });
     }
     
     public boolean isGameFinished() {
-        return(false);
+        boolean gameFinished = true;
+        for(TrackLane trackLane : this.currentRaceTrack.getTrackLanesList()){
+            if(trackLane.getCarDriver().getVehicle().getCurrentDistance() < this.currentRaceTrack.getTrackLanesLength()) {
+                gameFinished = false;
+                break;
+            }
+        }
+        return(gameFinished);
     }
 
-    public List<CarDriver> getDriversResultList() {
-        return(null);
+    public Map<Integer, CarDriver> getDriversResultList() {
+        return(this.driversMapByArrival);
     }
-    
-    
-
-
-    
     
 }

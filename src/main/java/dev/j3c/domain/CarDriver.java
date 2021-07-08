@@ -1,6 +1,8 @@
 
 package dev.j3c.domain;
 
+import java.util.Objects;
+
 public class CarDriver {
     private String username, name, nationality;
     private Vehicle vehicle; 
@@ -51,6 +53,41 @@ public class CarDriver {
     public String toString() {
         return "username: " + username + ", name: " + name + ", nationality: " + nationality + '}';
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.username);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.nationality);
+        hash = 59 * hash + Objects.hashCode(this.vehicle);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CarDriver other = (CarDriver) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.nationality, other.nationality)) {
+            return false;
+        }
+        if (!Objects.equals(this.vehicle, other.vehicle)) {
+            return false;
+        }
+        return true;
+    }
 }

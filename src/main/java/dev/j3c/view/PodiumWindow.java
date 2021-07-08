@@ -2,17 +2,17 @@
 package dev.j3c.view;
 
 import dev.j3c.domain.CarDriver;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PodiumWindow extends javax.swing.JFrame {
     
-    private ArrayList<CarDriver> driverResultList;
+    private HashMap<Integer,CarDriver> driversResultMap;
     
-    public PodiumWindow(List<CarDriver> driversResultList) {
+    public PodiumWindow(Map<Integer, CarDriver> driversResultList) {
         super("Resultados Finales");
         initComponents();
-        this.driverResultList = (ArrayList<CarDriver>) driversResultList;
+        this.driversResultMap = (HashMap<Integer,CarDriver>) driversResultList;
         this.configWindow();
         this.setFinalPodium();
         this.setRestOfFinalPositions();
@@ -26,10 +26,11 @@ public class PodiumWindow extends javax.swing.JFrame {
     }
     
     private void setRestOfFinalPositions() {
-        if(this.driverResultList.size() > 3){
-            this.jTextAreaRestOfDrivers.setText("Resultados de los otros corredores:\n");
-            for(CarDriver driver : this.driverResultList){
-                this.jTextAreaRestOfDrivers.append("\n" + driver.toString() + "\n" + driver.getVehicle().toString() + "\n");
+        if(this.driversResultMap.size() > 3){
+            this.jTextAreaRestOfDrivers.setText("\t\tResultados de los otros corredores:\n\n");
+            for(int i = 4 ; i < this.driversResultMap.size() ; i++){
+                this.jTextAreaRestOfDrivers.append(this.driversResultMap.get(i).toString() + "\n");
+                this.jTextAreaRestOfDrivers.append(this.driversResultMap.get(i).getVehicle().toString() + "\n\n");
             }
         } else {
             this.jTextAreaRestOfDrivers.setText("");
@@ -39,14 +40,14 @@ public class PodiumWindow extends javax.swing.JFrame {
     }
     
     private void setFinalPodium(){
-        this.jLabelFirstPlaceDriver.setText(this.driverResultList.get(0).toString());
-        this.jLabelFirstPlaceCar.setText(this.driverResultList.get(0).getVehicle().toString());
+        this.jLabelFirstPlaceDriver.setText(this.driversResultMap.get(1).toString());
+        this.jLabelFirstPlaceCar.setText(this.driversResultMap.get(1).getVehicle().toString());
         
-        this.jLabelFirstPlaceDriver.setText(this.driverResultList.get(1).toString());
-        this.jLabelFirstPlaceCar.setText(this.driverResultList.get(1).getVehicle().toString());
+        this.jLabelFirstPlaceDriver.setText(this.driversResultMap.get(2).toString());
+        this.jLabelFirstPlaceCar.setText(this.driversResultMap.get(2).getVehicle().toString());
         
-        this.jLabelFirstPlaceDriver.setText(this.driverResultList.get(2).toString());
-        this.jLabelFirstPlaceCar.setText(this.driverResultList.get(2).getVehicle().toString());
+        this.jLabelFirstPlaceDriver.setText(this.driversResultMap.get(3).toString());
+        this.jLabelFirstPlaceCar.setText(this.driversResultMap.get(3).getVehicle().toString());
         
     }
     
