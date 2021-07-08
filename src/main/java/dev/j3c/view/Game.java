@@ -5,8 +5,13 @@
  */
 package dev.j3c.view;
 
+import dev.j3c.domain.CarDriver;
 import javax.swing.JOptionPane;
 import dev.j3c.model.DBController;
+import dev.j3c.domain.RaceTrack;
+import dev.j3c.domain.TrackLane;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,13 +19,11 @@ import dev.j3c.model.DBController;
  */
 public class Game extends javax.swing.JFrame {
 
-    private int numDrivers;
     private DBController DBControl;
     private int gameStatus; 
-    
+    private RaceTrack currentRaceTrack;
     public Game() {
-        this.numDrivers = -1;
-        this.gameStatus = 1;
+        this.gameStatus = 0;
         this.initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -44,11 +47,11 @@ public class Game extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonCurrentGameDrivers = new javax.swing.JButton();
+        jButtonGoAhead = new javax.swing.JButton();
+        jButtonGameRepeat = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jButtonDriversHistory = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
 
         jMenu3.setText("File");
@@ -95,29 +98,29 @@ public class Game extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Lista de Corredores");
 
-        jButton2.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Ver Lista de Corredores");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCurrentGameDrivers.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
+        jButtonCurrentGameDrivers.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonCurrentGameDrivers.setText("Ver Lista de Corredores");
+        jButtonCurrentGameDrivers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonCurrentGameDriversActionPerformed(evt);
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon("/Users/administrator/Desktop/Cursos Desarrollo y BDD/AppJuegoCarros/src/main/java/dev/j3c/assets/Car-Button.png")); // NOI18N
-        jButton5.setEnabled(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGoAhead.setIcon(new javax.swing.ImageIcon("/Users/administrator/Desktop/Cursos Desarrollo y BDD/AppJuegoCarros/src/main/java/dev/j3c/assets/Car-Button.png")); // NOI18N
+        jButtonGoAhead.setEnabled(false);
+        jButtonGoAhead.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonGoAheadActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Repetir Juego");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGameRepeat.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
+        jButtonGameRepeat.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonGameRepeat.setText("Repetir Juego");
+        jButtonGameRepeat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonGameRepeatActionPerformed(evt);
             }
         });
 
@@ -128,12 +131,12 @@ public class Game extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
-        jButton6.setText("Historial de Corredores");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDriversHistory.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
+        jButtonDriversHistory.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonDriversHistory.setText("Historial de Corredores");
+        jButtonDriversHistory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonDriversHistoryActionPerformed(evt);
             }
         });
 
@@ -163,13 +166,13 @@ public class Game extends javax.swing.JFrame {
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButtonCurrentGameDrivers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(37, 37, 37)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jButtonNewGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(27, 27, 27))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -179,7 +182,7 @@ public class Game extends javax.swing.JFrame {
                                         .addComponent(jButtonExit))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(60, 60, 60)
-                                        .addComponent(jButton5)))
+                                        .addComponent(jButtonGoAhead)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
@@ -194,13 +197,13 @@ public class Game extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCurrentGameDrivers, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jButtonNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
@@ -222,52 +225,81 @@ public class Game extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void inputNumberOfDrivers() {
-        this.numDrivers = -1;
-        while(this.numDrivers < 3) {
+    
+    private int inputRaceTrackLength() {
+        int lengthKM = 0;
+        while(lengthKM <= 0) {
             try {
-                this.numDrivers = Integer.parseInt(JOptionPane.showInputDialog(this,"Ingrese la cantidad de juegadores mayor o igual que 3.","Cantidad de Corredores",3));
-                if(this.numDrivers < 3) JOptionPane.showMessageDialog(this, "Numero de corredores invalido, se requieren minimo 3.","Numero de Corredores Invalido",2);
+                lengthKM = Integer.parseInt(JOptionPane.showInputDialog(this,"Ingrese una cantidad entera para la distancia a recorrer (en kilometros)","Longitud de la Carrera",3));
+                if(lengthKM <= 0) JOptionPane.showMessageDialog(this, "La longitud ingresada es invalida, las carreras son de minimo 1 kilometro.","Longitud invalida",2);
             } catch(NumberFormatException ex1) {
                 JOptionPane.showMessageDialog(this, "Por favor ingrese una cantidad numerica.","Formato de Dato Incorrecto",2);
             }
         }
+        return(lengthKM);
     }
     
-    private void inputDriversData(){
-        for(int i = 0 ; i < this.numDrivers ; i++){
-            int idDriver JOptionPane.showInputDialog(this)
+    private int inputNumberOfDrivers() {
+        int numDrivers = -1;
+        while(numDrivers < 3 || numDrivers > 20) {
+            try {
+                numDrivers = Integer.parseInt(JOptionPane.showInputDialog(this,"Ingrese la cantidad de juegadores mayor o igual que 3 y menor o igual a 20.","Cantidad de Corredores",3));
+                if(numDrivers < 3) JOptionPane.showMessageDialog(this, "Numero de corredores invalido, se requieren minimo 3.","Numero de Corredores Invalido",2);
+                if(numDrivers > 20) JOptionPane.showMessageDialog(this, "Numero de corredores invalido, se requieren maximo 20.","Numero de Corredores Invalido",2);
+            } catch(NumberFormatException ex1) {
+                JOptionPane.showMessageDialog(this, "Por favor ingrese una cantidad numerica.","Formato de Dato Incorrecto",2);
+            }
         }
+        return(numDrivers);
+    }
+    
+    private List<TrackLane> getDriversData(int numDrivers){
+        List<TrackLane> trackLanesList = new ArrayList<>();
+        for(int i = 0 ; i < numDrivers ; i++){
+            CarDriver driver = DBControl.getRandomDriver();
+            TrackLane trackLane = new TrackLane(driver, (i + 1));
+            trackLanesList.add(trackLane);
+        }
+        return(trackLanesList);
+    }
+    
+    private void createRaceTrack(){
+        int raceLength = this.inputRaceTrackLength();
+        int numDrivers = this.inputNumberOfDrivers();
+        List<TrackLane> trackLanesList = this.getDriversData(numDrivers);
+        this.currentRaceTrack = new RaceTrack(raceLength, trackLanesList);
     }
     
     private void jButtonNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewGameActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(this,"Al iniciar el nuevo juego se perdera el progreso del juego actual, aun asi desea inicarlo? ","Iniciar un nuevo juego", 0);
+        int confirm = 0;
+        if(this.gameStatus != 0) { 
+            confirm = JOptionPane.showConfirmDialog(this,"Al iniciar el nuevo juego se perdera el progreso del juego actual, aun asi desea inicarlo? ","Iniciar un nuevo juego", 0);
+        }
         if(confirm == 0) {
-            this.inputNumberOfDrivers();
-            this.inputDriversData();
-        }    
+            this.gameStatus = 1;
+            this.createRaceTrack();
+        }
     }//GEN-LAST:event_jButtonNewGameActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonCurrentGameDriversActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCurrentGameDriversActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonCurrentGameDriversActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonGameRepeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGameRepeatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonGameRepeatActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonGoAheadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoAheadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonGoAheadActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButtonDriversHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDriversHistoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButtonDriversHistoryActionPerformed
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         int confirm = 0;
@@ -315,12 +347,12 @@ public class Game extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButtonCurrentGameDrivers;
+    private javax.swing.JButton jButtonDriversHistory;
     private javax.swing.JButton jButtonExit;
+    private javax.swing.JButton jButtonGameRepeat;
+    private javax.swing.JButton jButtonGoAhead;
     private javax.swing.JButton jButtonNewGame;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
@@ -330,4 +362,5 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
 }
