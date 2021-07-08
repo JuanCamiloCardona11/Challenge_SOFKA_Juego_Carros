@@ -160,5 +160,17 @@ public class GameController {
     public Map<Integer, CarDriver> getDriversResultList() {
         return(this.driversMapByArrival);
     }
+
+    public boolean constructCurrentPodium() {
+        boolean podiumRegistred = false;
+        CarDriver firstPositionDriver = this.driversMapByArrival.get(1);
+        CarDriver secondPositionDriver = this.driversMapByArrival.get(2);
+        CarDriver thirdPositionDriver = this.driversMapByArrival.get(3);
+        int raceLength = this.currentRaceTrack.getTrackLanesLength();
+        if(this.DBControl.addNewPodium(firstPositionDriver, secondPositionDriver, thirdPositionDriver, raceLength)){
+            podiumRegistred = true;
+        }
+        return(podiumRegistred);
+    }
     
 }

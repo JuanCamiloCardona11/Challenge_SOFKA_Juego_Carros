@@ -25,9 +25,7 @@ public class DBController{
             }
         } catch(SQLException ex) {
             ex.printStackTrace(System.out);
-        } finally {
-            DBConnection.disconnetBD();
-        }
+        }    
     }
     
     private void getCarData(CarDriver theCarDriver) {
@@ -44,8 +42,6 @@ public class DBController{
             } 
         } catch(SQLException ex) {
             ex.printStackTrace(System.out);
-        } finally {
-            DBConnection.disconnetBD();
         }
     }
     
@@ -54,6 +50,7 @@ public class DBController{
         if(DBConnection.connectBD()){
             this.getParticipantData(randomCarDriver);
             this.getCarData(randomCarDriver);
+            DBConnection.disconnetBD();
         }
         return(randomCarDriver);
     }
@@ -121,6 +118,7 @@ public class DBController{
         if(DBConnection.connectBD()){
             result1 = this.insertNewParticipantData(carDriver);
             result2 = this.insertNewCarData(carDriver);
+            DBConnection.disconnetBD();
         }
         return(result1 && result2);
     }
@@ -161,12 +159,12 @@ public class DBController{
     public Podium constructPodium(ResultSet result) throws SQLException{
         Podium thePodium;
         int competitionLength = result.getInt("competition_length");
-        String firsPlaceName = result.getString("name_driver"),
-            firstPlaceNationality = result.getString("nationality_driver"), 
-            secondPlaceName = result.getString("name_driver"),
-            secondPlaceNationality = result.getString("nationality_driver"), 
-            thirdPlaceName = result.getString("name_driver"),
-            thirdPlaceNationality = result.getString("nationality_driver");
+        String firsPlaceName = result.getString("first_place_name"),
+            firstPlaceNationality = result.getString("first_place_nationality"), 
+            secondPlaceName = result.getString("second_place_name"),
+            secondPlaceNationality = result.getString("second_place_nationality"), 
+            thirdPlaceName = result.getString("third_place_name"),
+            thirdPlaceNationality = result.getString("third_place_nationality");
         CarDriver firstPlaceDriver = new CarDriver(firsPlaceName, firstPlaceNationality),
             SecondPlaceDriver = new CarDriver(secondPlaceName, secondPlaceNationality),
             thirdPlaceDriver = new CarDriver(thirdPlaceName, thirdPlaceNationality);
@@ -194,6 +192,31 @@ public class DBController{
             }
         }
         return(podiumsList);
+    }
+
+    public boolean addNewPodium(CarDriver firstPositionDriver, CarDriver secondPositionDriver, CarDriver thirdPositionDriver, int raceLength) {
+        boolean podiumRegistred = false;
+        if(DBConnection.connectBD()) {
+            Connection conn = DBConnection.getBDConnection();
+            PreparedStatement prepStmt;
+            try {
+                prepStmt = conn.prepareStatement("INSERT INTO podiums (competition_length, first_place_name, first_place_nationality, second_place_name, second_place_nationality, third_place_name, third_place_nationality) VALUES (?,?,?,?,?,?,?)");
+                prepStmt.setInt(1, raceLength);
+                prepStmt.setString(2, firstPositionDriver.getName());               
+                prepStmt.setString(3, firstPositionDriver.getNationality());
+                prepStmt.setString(4, secondPositionDriver.getName());               
+                prepStmt.setString(5, secondPositionDriver.getNationality());
+                prepStmt.setString(6, thirdPositionDriver.getName());               
+                prepStmt.setString(7, thirdPositionDriver.getNationality());
+                int result = prepStmt.executeUpdate();
+                if(result > 0) podiumRegistred = true;
+            } catch(SQLException ex) {
+                ex.printStackTrace(System.out);
+            } finally {
+                DBConnection.disconnetBD();
+            }
+        }
+        return(podiumRegistred);        
     }
 
     

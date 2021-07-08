@@ -294,8 +294,10 @@ public class GameView extends javax.swing.JFrame {
         if(this.gameController.isGameFinished()){
             this.jButtonGoAhead.setEnabled(false);
             this.gameStatus = 0;
-            PodiumWindow podiumWindow = new PodiumWindow(this.gameController.getDriversResultList());
-            podiumWindow.setVisible(true);
+            if(this.gameController.constructCurrentPodium()) {
+                PodiumWindow podiumWindow = new PodiumWindow(this.gameController.getDriversResultList());
+                podiumWindow.setVisible(true);
+            }    
         }
     }//GEN-LAST:event_jButtonGoAheadActionPerformed
 

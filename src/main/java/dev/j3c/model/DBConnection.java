@@ -44,12 +44,4 @@ public class DBConnection {
             }
         }
     }    
-    
-    public static void commit() throws SQLException{
-        connBD.commit();
-    }
-    
-    public static void rollback() throws SQLException{
-        connBD.rollback();
-    }
 }
