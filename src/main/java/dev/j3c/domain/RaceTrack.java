@@ -5,22 +5,28 @@ import java.util.List;
 import dev.j3c.domain.TrackLane;
 
 public class RaceTrack {
-    private int trackLength;
-    private List<TrackLane> listaCarriles;
+    private int trackLanesLength;
+    private List<TrackLane> trackLanesList;
 
     public RaceTrack() {
     }
 
-    public RaceTrack(int trackLength, List<TrackLane> listaCarriles) {
-        this.trackLength = trackLength;
-        this.listaCarriles = listaCarriles;
+    public RaceTrack(int trackLanesLength, List<TrackLane> trackLanesList) {
+        this.trackLanesLength = trackLanesLength;
+        this.trackLanesList = trackLanesList;
     }
 
-    public int getTrackLength() {
-        return (this.trackLength);
+    public int getTrackLanesLength() {
+        return (this.trackLanesLength);
     }
 
-    public List<TrackLane> getListaCarriles() {
-        return (this.listaCarriles);
+    public List<TrackLane> getTrackLanesList() {
+        return (this.trackLanesList);
+    }
+
+    public void goAhead() {
+        this.trackLanesList.forEach((trackLane) -> {
+            trackLane.getCarDriver().getVehicle().goAhead();
+        });
     }
 }

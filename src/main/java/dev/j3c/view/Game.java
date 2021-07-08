@@ -23,6 +23,7 @@ public class Game extends javax.swing.JFrame {
     private int gameStatus; 
     private RaceTrack currentRaceTrack;
     public Game() {
+        super("CHALLENGE - JUEGO DE CARROS POR CONSOLA");
         this.gameStatus = 0;
         this.initComponents();
         this.setResizable(false);
@@ -62,7 +63,7 @@ public class Game extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(60, 81, 134));
+        jPanel1.setBackground(new java.awt.Color(162, 219, 250));
 
         jButtonNewGame.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
         jButtonNewGame.setForeground(new java.awt.Color(0, 0, 0));
@@ -75,10 +76,7 @@ public class Game extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Corredor 1", "Corredor 2", "Corredor 3", "Corredor 4", "Corredor 5"
@@ -181,8 +179,8 @@ public class Game extends javax.swing.JFrame {
                                         .addGap(98, 98, 98)
                                         .addComponent(jButtonExit))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(60, 60, 60)
-                                        .addComponent(jButtonGoAhead)))
+                                        .addGap(81, 81, 81)
+                                        .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
@@ -197,8 +195,9 @@ public class Game extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(25, 25, 25)
+                        .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(jButtonCurrentGameDrivers, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +232,7 @@ public class Game extends javax.swing.JFrame {
                 lengthKM = Integer.parseInt(JOptionPane.showInputDialog(this,"Ingrese una cantidad entera para la distancia a recorrer (en kilometros)","Longitud de la Carrera",3));
                 if(lengthKM <= 0) JOptionPane.showMessageDialog(this, "La longitud ingresada es invalida, las carreras son de minimo 1 kilometro.","Longitud invalida",2);
             } catch(NumberFormatException ex1) {
-                JOptionPane.showMessageDialog(this, "Por favor ingrese una cantidad numerica.","Formato de Dato Incorrecto",2);
+                JOptionPane.showMessageDialog(this, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",2);
             }
         }
         return(lengthKM);
@@ -247,7 +246,7 @@ public class Game extends javax.swing.JFrame {
                 if(numDrivers < 3) JOptionPane.showMessageDialog(this, "Numero de corredores invalido, se requieren minimo 3.","Numero de Corredores Invalido",2);
                 if(numDrivers > 20) JOptionPane.showMessageDialog(this, "Numero de corredores invalido, se requieren maximo 20.","Numero de Corredores Invalido",2);
             } catch(NumberFormatException ex1) {
-                JOptionPane.showMessageDialog(this, "Por favor ingrese una cantidad numerica.","Formato de Dato Incorrecto",2);
+                JOptionPane.showMessageDialog(this, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",2);
             }
         }
         return(numDrivers);
@@ -290,11 +289,11 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGameRepeatActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        HelpWindow helpWindow = new HelpWindow();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButtonGoAheadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoAheadActionPerformed
-        // TODO add your handling code here:
+        this.currentRaceTrack.goAhead();
     }//GEN-LAST:event_jButtonGoAheadActionPerformed
 
     private void jButtonDriversHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDriversHistoryActionPerformed
