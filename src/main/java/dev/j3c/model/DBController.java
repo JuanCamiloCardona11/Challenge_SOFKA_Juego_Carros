@@ -28,12 +28,13 @@ public class DBController{
         }    
     }
     
-    private void getCarData(CarDriver theCarDriver) {
+    private void getCarData(int idParticipant, CarDriver theCarDriver) {
         Connection conn = DBConnection.getBDConnection();
         PreparedStatement prepStmt;
         ResultSet result;
         try{
-            prepStmt = conn.prepareStatement("SELECT * FROM vehicles ORDER BY RAND() LIMIT 1");
+            prepStmt = conn.prepareStatement("SELECT * FROM vehicles WHERE id_vehicle = ?");
+            prepStmt.setInt(1, idParticipant);
             result = prepStmt.executeQuery();
             if(result.next()){
                 theCarDriver.getVehicle().setBrand(result.getString("vehicle_brand"));
@@ -49,7 +50,8 @@ public class DBController{
         CarDriver randomCarDriver = new CarDriver();
         if(DBConnection.connectBD()){
             this.getParticipantData(randomCarDriver);
-            this.getCarData(randomCarDriver);
+            int usernameParticipant = this.getIdParticipant();
+            this.getCarData(usernameParticipant, randomCarDriver);
             DBConnection.disconnetBD();
         }
         return(randomCarDriver);
@@ -217,6 +219,10 @@ public class DBController{
             }
         }
         return(podiumRegistred);        
+    }
+
+    private int getIdParticipant() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
