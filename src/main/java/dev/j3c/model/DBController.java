@@ -143,7 +143,7 @@ public class DBController{
             PreparedStatement prepStmt;
             ResultSet result;
             try{
-                prepStmt = conn.prepareStatement("SELECT * FROM drivers");
+                prepStmt = conn.prepareStatement("SELECT * FROM drivers ORDER BY races_won DESC");
                 result = prepStmt.executeQuery();
                 while(result.next()){
                     CarDriver theCarDriver = this.constructCarDriver(result);
