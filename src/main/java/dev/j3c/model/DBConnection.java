@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 public class DBConnection {
     
-    private static final String URL = "jdbc:mysql://localhost:3306/";
+    private static final String URL = "jdbc:mysql://localhost:3306/challenge_sofka?UseSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
-    private static final String PASSWORD = "prueba1234";
+    private static final String PASSWORD = "mysql12345ROOT";
     private static Connection connBD;
     
     public DBConnection(){
@@ -44,4 +44,12 @@ public class DBConnection {
             }
         }
     }    
+    
+    public static void commit() throws SQLException{
+        connBD.commit();
+    }
+    
+    public static void rollback() throws SQLException{
+        connBD.rollback();
+    }
 }
