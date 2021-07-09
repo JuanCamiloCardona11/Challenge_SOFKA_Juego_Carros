@@ -2,7 +2,6 @@
 package dev.j3c.domain;
 
 import java.util.List;
-import dev.j3c.domain.TrackLane;
 
 public class RaceTrack {
     private int trackLanesLength;

@@ -9,38 +9,33 @@ import javax.swing.JOptionPane;
 
 public class GameController {
     private RaceTrack currentRaceTrack;
-    private DBController DBControl;
+    private final DBController DBControl;
     private int finalPosition; 
-    //listo!
+    
     public GameController(){
         this.DBControl = new DBController();
         this.finalPosition = 0;
     }
-    
-    //listo!
+     
     public RaceTrack getCurrentRaceTrack() {
         return this.currentRaceTrack;
     }
 
-    //listo!
     public void setCurrentRaceTrack(RaceTrack newRaceTrack) {
         this.currentRaceTrack = newRaceTrack;
         this.finalPosition = 0;
     }
     
-    //listo!
     public List<CarDriver> getFullListCarDrivers() {
         List<CarDriver> carDriversList = this.DBControl.getFullListCarDrivers();
         return(carDriversList);
     }
     
-    //listo!
     public List<Podium> getFullListPodiums() {
         List<Podium> podiumsList = this.DBControl.getFullListPodiums();
         return(podiumsList);
     }
 
-    //listo!
     public boolean validateNewUsername(String driverUsername) {
         boolean validUsername = false;
         if(driverUsername.matches("^[a-z0-9_-]{3,50}$")){
@@ -55,7 +50,6 @@ public class GameController {
         return(validUsername);
     }
 
-    //listo!
     private String validateStringInput(String dato, int maxLength) {
         String fullName = "";
         while(!fullName.matches("^[a-zA-Z ]{3," + String.valueOf(maxLength) + "}$")){
@@ -64,7 +58,6 @@ public class GameController {
         return(fullName);
     }
     
-    //listo!
     public void getNewDriverData(String driverUsername) {
         String name = this.validateStringInput("el nombre", 100),
             nationality = this.validateStringInput("la nacionalidad",30),
@@ -80,7 +73,6 @@ public class GameController {
         }
     }
 
-    //listo!
     public int inputRaceTrackLength() {
         int lengthKM = 0;
         while(lengthKM <= 0) {
@@ -94,7 +86,6 @@ public class GameController {
         return(lengthKM * 1000);
     }
     
-    //listo!
     public int inputNumberOfDrivers() {
         int numDrivers = -1;
         while(numDrivers < 3 || numDrivers > 20) {
@@ -109,7 +100,6 @@ public class GameController {
         return(numDrivers);
     }
     
-    //listo!
     public List<TrackLane> getDriversData(int numDrivers){
         List<TrackLane> trackLanesList = new ArrayList<>();
         for(int i = 0 ; i < numDrivers ; i++){
@@ -128,7 +118,6 @@ public class GameController {
         return(registred);
     }
     
-    //listo!
     public void goAhead() {
         for(TrackLane trackLane : this.currentRaceTrack.getTrackLanesList()) {
             if(trackLane.getCarDriver().getVehicle().getCurrentDistance() < this.currentRaceTrack.getTrackLanesLength()){

@@ -14,10 +14,6 @@ public class PodiumWindow extends javax.swing.JFrame {
         initComponents();
         this.driversResultList = (List<TrackLane>) driversResultList;
         this.configWindow();
-        System.out.println("**********************" + driversResultList.size());
-        for(TrackLane tr : this.driversResultList){
-            System.out.println(tr.getCarDriver() + "    Final position: " + tr.getFinalPosition());
-        }
         this.setFinalPodium();
         this.setRestOfFinalPositions();
     }
@@ -227,7 +223,6 @@ public class PodiumWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jButtoncloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncloseActionPerformed
         this.setVisible(false);
         this.dispose();

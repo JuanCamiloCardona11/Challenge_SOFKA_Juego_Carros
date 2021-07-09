@@ -5,6 +5,7 @@ import dev.j3c.domain.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class DBController{
     
@@ -24,7 +25,7 @@ public class DBController{
                 theCarDriver.setNationality(result.getString("nationality_driver"));
             }
         } catch(SQLException ex) {
-            ex.printStackTrace(System.out);
+            JOptionPane.showMessageDialog(null, "Error al intentar obtener la informacion del conductor: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
         }   
     }
     
@@ -44,7 +45,7 @@ public class DBController{
                     theCarDriver.setVehicle(new Vehicle(brand, colour, model));
                 } 
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar obtener la informacion del auto perteneciente al conductor: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             } finally {
                 DBConnection.disconnetBD();
             }
@@ -65,7 +66,7 @@ public class DBController{
                     idParticipant = result.getInt("id_driver");
                 } 
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar obtener la informacion del conductor: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             } finally {
                 DBConnection.disconnetBD();
             }
@@ -96,7 +97,7 @@ public class DBController{
                     driverExists = true;
                 }
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar verificar la existencia del conductor: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             } finally {
                 DBConnection.disconnetBD();
             }
@@ -117,7 +118,7 @@ public class DBController{
                 int result = prepStmt.executeUpdate();
                 if(result > 0) driverRegistred = true;
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar insertar la informacion del nuevo conductor: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             }
         }        
         return(driverRegistred);
@@ -136,7 +137,7 @@ public class DBController{
                 int result = prepStmt.executeUpdate();
                 if(result > 0) carRegistred = true;
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar insertar la informacion del nuevo auto: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             }
         }        
         return(carRegistred);
@@ -177,7 +178,7 @@ public class DBController{
                     carDriversList.add(theCarDriver);
                 }
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar obtener la informacion de todos los conductores existentes en el sistema: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             } finally {
                 DBConnection.disconnetBD();
             }
@@ -215,7 +216,7 @@ public class DBController{
                     podiumsList.add(thePodium);
                 }
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar obtener la informacion de todos los podios existentes en el sistema: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             } finally {
                 DBConnection.disconnetBD();
             }
@@ -240,7 +241,7 @@ public class DBController{
                 int result = prepStmt.executeUpdate();
                 if(result > 0) podiumRegistred = true;
             } catch(SQLException ex) {
-                ex.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(null, "Error al intentar insertar un nuevo podio en el sistema: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             } finally {
                 DBConnection.disconnetBD();
             }

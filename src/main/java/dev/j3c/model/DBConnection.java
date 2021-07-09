@@ -1,10 +1,7 @@
 package dev.j3c.model;
 
 import javax.swing.JOptionPane;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
+import java.sql.*;
 
 public class DBConnection {
     
@@ -22,10 +19,8 @@ public class DBConnection {
             Class.forName("com.mysql.jdbc.Driver");
             connBD = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
             connStatusBD = true;
-        } catch ( ClassNotFoundException ex1) {
-            ex1.printStackTrace(System.out);
-        } catch (SQLException ex2) {
-            ex2.printStackTrace(System.out);
+        } catch ( ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al intentar obtener una conexion con la BD: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
         }
         return(connStatusBD);
     }
@@ -39,8 +34,8 @@ public class DBConnection {
             try {
                 connBD.close();
                 connBD = null;
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error al intentar desconectar la base de datos, intente nuevamente.");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al intentar desconectar la base de datos: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             }
         }
     }    

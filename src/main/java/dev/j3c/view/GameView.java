@@ -278,7 +278,6 @@ public class GameView extends javax.swing.JFrame {
 
     private void jButtonDriversHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDriversHistoryActionPerformed
         List<CarDriver> carDriversFullList = this.gameController.getFullListCarDrivers();
-        System.out.println("*******" + carDriversFullList.size());
         DriversHistoryWindow driversHistoryWindow = new DriversHistoryWindow(carDriversFullList);
         driversHistoryWindow.setVisible(true);
     }//GEN-LAST:event_jButtonDriversHistoryActionPerformed

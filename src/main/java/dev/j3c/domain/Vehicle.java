@@ -2,7 +2,6 @@
 package dev.j3c.domain;
 
 import dev.j3c.helpers.RandomDistance;
-import java.awt.Color;
 
 public class Vehicle {
     private String brand;

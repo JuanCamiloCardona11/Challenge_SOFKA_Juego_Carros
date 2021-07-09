@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dev.j3c.view;
 
 import dev.j3c.domain.CarDriver;
 import java.util.List;
 
-/**
- *
- * @author administrator
- */
 public class DriversHistoryWindow extends javax.swing.JFrame {
     
     private List<CarDriver> carDriversFullList;

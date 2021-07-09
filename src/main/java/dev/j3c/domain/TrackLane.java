@@ -35,8 +35,6 @@ public class TrackLane {
         this.finalPosition = finalPosition;
     }
 
-    
-    
     @Override
     public String toString() {
         return "TrackLane{" + "carDriver=" + carDriver + '}';
