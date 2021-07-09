@@ -36,15 +36,20 @@ public class RaceStatusWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(162, 219, 250));
+
         jLabel1.setFont(new java.awt.Font(".SF NS Text", 0, 18)); // NOI18N
         jLabel1.setText("Lista de Corredores en el Juego Actual");
 
         jTextAreaRAceStatus.setEditable(false);
+        jTextAreaRAceStatus.setBackground(new java.awt.Color(250, 235, 224));
         jTextAreaRAceStatus.setColumns(20);
+        jTextAreaRAceStatus.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
         jTextAreaRAceStatus.setRows(5);
         jScrollPane1.setViewportView(jTextAreaRAceStatus);
 
-        jButtonClose.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
+        jButtonClose.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
+        jButtonClose.setForeground(new java.awt.Color(0, 0, 0));
         jButtonClose.setText("Cerrar");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

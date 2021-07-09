@@ -52,13 +52,19 @@ public class CurrentDriversWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(162, 219, 250));
+
         jLabel1.setFont(new java.awt.Font(".SF NS Text", 0, 18)); // NOI18N
         jLabel1.setText("Lista de Corredores en la Actual Carrera");
 
+        jTextAreaCurrDrivers.setBackground(new java.awt.Color(250, 235, 224));
         jTextAreaCurrDrivers.setColumns(20);
+        jTextAreaCurrDrivers.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
         jTextAreaCurrDrivers.setRows(5);
         jScrollPane1.setViewportView(jTextAreaCurrDrivers);
 
+        jButton1.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
