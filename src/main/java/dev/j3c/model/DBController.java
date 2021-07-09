@@ -139,7 +139,7 @@ public class DBController{
             } catch(SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al intentar insertar la informacion del nuevo auto: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
             }
-        }        
+        }
         return(carRegistred);
     }
     
@@ -171,7 +171,7 @@ public class DBController{
             PreparedStatement prepStmt;
             ResultSet result;
             try{
-                prepStmt = conn.prepareStatement("SELECT * FROM drivers ORDER BY races_won DESC");
+                prepStmt = conn.prepareStatement("SELECT * FROM drivers");
                 result = prepStmt.executeQuery();
                 while(result.next()){
                     CarDriver theCarDriver = this.constructCarDriver(result);
