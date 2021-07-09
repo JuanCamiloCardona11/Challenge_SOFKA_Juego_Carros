@@ -25,33 +25,60 @@ public class DBController{
             }
         } catch(SQLException ex) {
             ex.printStackTrace(System.out);
-        }    
+        }   
     }
     
     private void getCarData(int idParticipant, CarDriver theCarDriver) {
-        Connection conn = DBConnection.getBDConnection();
-        PreparedStatement prepStmt;
-        ResultSet result;
-        try{
-            prepStmt = conn.prepareStatement("SELECT * FROM vehicles WHERE id_vehicle = ?");
-            prepStmt.setInt(1, idParticipant);
-            result = prepStmt.executeQuery();
-            if(result.next()){
-                theCarDriver.getVehicle().setBrand(result.getString("vehicle_brand"));
-                theCarDriver.getVehicle().setColour(result.getString("vehicle_colour"));
-                theCarDriver.getVehicle().setModel(result.getString("vehicle_model"));
-            } 
-        } catch(SQLException ex) {
-            ex.printStackTrace(System.out);
+        if (DBConnection.connectBD()) {
+            Connection conn = DBConnection.getBDConnection();
+            PreparedStatement prepStmt;
+            ResultSet result;
+            try{
+                prepStmt = conn.prepareStatement("SELECT * FROM vehicles WHERE id_vehicle = ? LIMIT 1");
+                prepStmt.setInt(1, idParticipant);
+                result = prepStmt.executeQuery();
+                if(result.next()) {
+                    String brand = result.getString("vehicle_brand");
+                    String colour = result.getString("vehicle_colour");
+                    String model = result.getString("vehicle_model");
+                    theCarDriver.setVehicle(new Vehicle(brand, colour, model));
+                } 
+            } catch(SQLException ex) {
+                ex.printStackTrace(System.out);
+            } finally {
+                DBConnection.disconnetBD();
+            }
         }
+    }
+    
+     private int getIdParticipant(String username) {
+        int idParticipant = 1;
+        if(DBConnection.connectBD()) {
+            Connection conn = DBConnection.getBDConnection();
+            PreparedStatement prepStmt;
+            ResultSet result;
+            try{
+                prepStmt = conn.prepareStatement("SELECT id_driver FROM drivers WHERE username_driver = ?");
+                prepStmt.setString(1, username);
+                result = prepStmt.executeQuery();
+                if(result.next()){
+                    idParticipant = result.getInt("id_driver");
+                } 
+            } catch(SQLException ex) {
+                ex.printStackTrace(System.out);
+            } finally {
+                DBConnection.disconnetBD();
+            }
+        }
+        return(idParticipant);
     }
     
     public CarDriver getRandomDriver() {
         CarDriver randomCarDriver = new CarDriver();
         if(DBConnection.connectBD()){
             this.getParticipantData(randomCarDriver);
-            int usernameParticipant = this.getIdParticipant();
-            this.getCarData(usernameParticipant, randomCarDriver);
+            int idDriver = this.getIdParticipant(randomCarDriver.getUsername());
+            this.getCarData(idDriver, randomCarDriver);
             DBConnection.disconnetBD();
         }
         return(randomCarDriver);
@@ -219,12 +246,5 @@ public class DBController{
             }
         }
         return(podiumRegistred);        
-    }
-
-    private int getIdParticipant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
+    } 
 }

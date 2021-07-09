@@ -51,9 +51,15 @@ public class Vehicle {
     public int getCurrentDistance() {
         return (this.currentDistance);
     }
+
+    public void setCurrentDistance(int currentDistance) {
+        this.currentDistance = currentDistance;
+    }
+    
+    
     
     @Override
     public String toString() {
-        return ("Vehicle {" + "brand: " + brand + ", colour: " + colour + ", model: " + model + '}');
+        return "Marca: " + brand + ", Color: " + colour + ", Modelo: " + model;
     }
 }

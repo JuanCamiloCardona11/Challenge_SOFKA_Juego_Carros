@@ -9,6 +9,7 @@ public class Podium {
     }
     
     public Podium(CarDriver primerPuesto, CarDriver segundoPuesto, CarDriver tercerPuesto, int raceLength) {
+        listaGanadores = new CarDriver[3];
         this.listaGanadores[0] = primerPuesto;
         this.listaGanadores[1] = segundoPuesto;
         this.listaGanadores[2] = tercerPuesto;

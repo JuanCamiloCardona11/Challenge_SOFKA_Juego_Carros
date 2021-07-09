@@ -56,7 +56,7 @@ public class CarDriver {
 
     @Override
     public String toString() {
-        return "username: " + username + ", name: " + name + ", nationality: " + nationality + '}';
+        return "Nombre de Usuario: " + username + ", Nombre: " + name + ", Pais: " + nationality;
     }
 
     @Override

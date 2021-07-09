@@ -29,9 +29,6 @@ public class GameView extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jButtonNewGame = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jButtonCurrentGameDrivers = new javax.swing.JButton();
         jButtonGoAhead = new javax.swing.JButton();
         jButtonGameRepeat = new javax.swing.JButton();
@@ -60,31 +57,10 @@ public class GameView extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Corredor 1", "Corredor 2", "Corredor 3", "Corredor 4", "Corredor 5"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel1.setFont(new java.awt.Font(".SF NS Text", 0, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Lista de Corredores");
-
         jButtonCurrentGameDrivers.setFont(new java.awt.Font(".SF NS Text", 0, 15)); // NOI18N
         jButtonCurrentGameDrivers.setForeground(new java.awt.Color(0, 0, 0));
         jButtonCurrentGameDrivers.setText("Ver Lista de Corredores");
+        jButtonCurrentGameDrivers.setEnabled(false);
         jButtonCurrentGameDrivers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCurrentGameDriversActionPerformed(evt);
@@ -159,63 +135,52 @@ public class GameView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jButtonNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jButtonPodiumsHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                        .addGap(222, 222, 222)
                         .addComponent(jButtonExit))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jButtonInputNewDriver))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonCurrentGameDrivers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonPodiumsHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(180, 180, 180)
-                        .addComponent(jButtonHelp))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                        .addGap(27, 27, 27)
+                        .addComponent(jButtonCurrentGameDrivers, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jButtonInputNewDriver)))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                        .addComponent(jButtonNewGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 191, Short.MAX_VALUE))
+                .addGap(99, 99, 99)
+                .addComponent(jButtonHelp)
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonHelp)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonHelp))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButtonNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonInputNewDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonCurrentGameDrivers, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonPodiumsHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButtonNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonCurrentGameDrivers, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonInputNewDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonPodiumsHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,7 +203,19 @@ public class GameView extends javax.swing.JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
-    private void drawNewRow(){ 
+    private void showDriversAdvances(){ 
+        String estadoActualCarrera = "";
+        for(TrackLane tr : this.gameController.getCurrentRaceTrack().getTrackLanesList()){
+            estadoActualCarrera += tr.getCarDriver().getName() + "\n";
+            estadoActualCarrera += tr.getCarDriver().getNationality() + "\n";
+            estadoActualCarrera += tr.getCarDriver().getVehicle().getBrand() + " " + tr.getCarDriver().getVehicle().getModel()+ "\n";
+            estadoActualCarrera += tr.getCarDriver().getVehicle().getCurrentDistance()+ "\n\n";
+        }
+        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + estadoActualCarrera);
+    }
+    
+    private void cleanUpTable() {
+        
     }
     
     private void createRaceTrack(){
@@ -249,6 +226,8 @@ public class GameView extends javax.swing.JFrame {
         this.gameController.setCurrentRaceTrack(newRaceTrack); 
     }
     
+    
+    
     private void jButtonNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewGameActionPerformed
         int confirm = 0;
         if(this.gameStatus != 0) { 
@@ -258,7 +237,9 @@ public class GameView extends javax.swing.JFrame {
             this.jButtonGameRepeat.setEnabled(true);
             this.gameStatus = 1;
             this.jButtonGoAhead.setEnabled(true);
+            this.jButtonCurrentGameDrivers.setEnabled(true);
             this.createRaceTrack();
+            this.cleanUpTable();
         }
     }//GEN-LAST:event_jButtonNewGameActionPerformed
     
@@ -267,8 +248,13 @@ public class GameView extends javax.swing.JFrame {
         for(TrackLane trackLane : this.gameController.getCurrentRaceTrack().getTrackLanesList()){
             currentDriversList.add(trackLane.getCarDriver());
         }
-        DriversWindow currentDriversListWindow = new DriversWindow(currentDriversList, "lista de Corredores Para la Actual Carrera");
-        currentDriversListWindow.setVisible(true);
+        //DriversWindow currentDriversListWindow = new DriversWindow(currentDriversList, "lista de Corredores Para la Actual Carrera");
+        //currentDriversListWindow.setVisible(true);
+        String listaCorredores = "";
+        for(CarDriver cd : currentDriversList){
+            listaCorredores += cd.toString() + "\n";
+        }
+        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + listaCorredores);
     }//GEN-LAST:event_jButtonCurrentGameDriversActionPerformed
 
     private void jButtonGameRepeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGameRepeatActionPerformed
@@ -279,7 +265,9 @@ public class GameView extends javax.swing.JFrame {
         if(confirm == 0) {
             this.gameStatus = 1;
             this.jButtonGoAhead.setEnabled(true);
-            //Reiniciar juego actual
+            this.jButtonCurrentGameDrivers.setEnabled(true);
+            this.gameController.resetCurrentGame();
+            this.cleanUpTable();
         }
     }//GEN-LAST:event_jButtonGameRepeatActionPerformed
 
@@ -290,9 +278,10 @@ public class GameView extends javax.swing.JFrame {
 
     private void jButtonGoAheadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoAheadActionPerformed
         this.gameController.goAhead();
-        this.drawNewRow();
+        this.showDriversAdvances();
         if(this.gameController.isGameFinished()){
             this.jButtonGoAhead.setEnabled(false);
+            this.jButtonCurrentGameDrivers.setEnabled(false);
             this.gameStatus = 0;
             if(this.gameController.constructCurrentPodium()) {
                 PodiumWindow podiumWindow = new PodiumWindow(this.gameController.getDriversResultList());
@@ -303,8 +292,14 @@ public class GameView extends javax.swing.JFrame {
 
     private void jButtonDriversHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDriversHistoryActionPerformed
         List<CarDriver> carDriversFullList = this.gameController.getFullListCarDrivers();
-        DriversWindow historyDriversListWindow = new DriversWindow(carDriversFullList, "Lista Completa de Corredores en el Sistema");
-        historyDriversListWindow.setVisible(true);
+        //DriversWindow historyDriversListWindow = new DriversWindow(carDriversFullList, "Lista Completa de Corredores en el Sistema");
+        //historyDriversListWindow.setVisible(true);
+        
+        String listaCorredores = "";
+        for(CarDriver cd : carDriversFullList){
+            listaCorredores += cd.toString() + "\n";
+        }
+        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + listaCorredores);
     }//GEN-LAST:event_jButtonDriversHistoryActionPerformed
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
@@ -326,8 +321,21 @@ public class GameView extends javax.swing.JFrame {
 
     private void jButtonPodiumsHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPodiumsHistoryActionPerformed
         List<Podium> podiumsFullList =  this.gameController.getFullListPodiums();
-        PodiumsHistoryWindow podiumsWindow = new PodiumsHistoryWindow(podiumsFullList);
-        podiumsWindow.setVisible(true);
+        
+        //PodiumsHistoryWindow podiumsWindow = new PodiumsHistoryWindow(podiumsFullList);
+        //podiumsWindow.setVisible(true);
+        String listaPodiums = "";
+        int i = 0;
+        for(Podium pd : podiumsFullList){
+            listaPodiums += "Primer puesto: " + pd.getListaGanadores()[i].getName()+ pd.getListaGanadores()[i].getNationality()+ "\n";
+            i++;
+            listaPodiums += "Segundo puesto puesto: " + pd.getListaGanadores()[i].getName() + pd.getListaGanadores()[i].getNationality() + "\n";
+            i++;
+            listaPodiums += "Tercer puesto: " + pd.getListaGanadores()[i].getName() + pd.getListaGanadores()[i].getNationality() + "\n";
+            i = 0;
+            listaPodiums += "\n\n";
+        }
+        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + listaPodiums);
     }//GEN-LAST:event_jButtonPodiumsHistoryActionPerformed
 
     public static void main(String args[]) {
@@ -364,12 +372,9 @@ public class GameView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInputNewDriver;
     private javax.swing.JButton jButtonNewGame;
     private javax.swing.JButton jButtonPodiumsHistory;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

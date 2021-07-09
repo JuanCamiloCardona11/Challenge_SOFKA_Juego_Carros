@@ -95,7 +95,7 @@ public class GameController {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",2);
             }
         }
-        return(lengthKM);
+        return(lengthKM * 1000);
     }
     
     //listo!
@@ -127,7 +127,7 @@ public class GameController {
     private boolean isArrivalRegistred(CarDriver theCarDriver) {
         boolean registred = false;
         for(Map.Entry<Integer, CarDriver> entry : this.driversMapByArrival.entrySet()) {
-            if(entry.getValue() == theCarDriver){
+            if(entry.getValue().equals(theCarDriver)){
                 registred = true;
                 break;
             }
@@ -137,13 +137,13 @@ public class GameController {
     
     //listo!
     public void goAhead() {
-        this.currentRaceTrack.getTrackLanesList().forEach((trackLane) -> {
+        for(TrackLane trackLane : this.currentRaceTrack.getTrackLanesList()) {
             if(trackLane.getCarDriver().getVehicle().getCurrentDistance() < this.currentRaceTrack.getTrackLanesLength()){
                 trackLane.getCarDriver().getVehicle().goAhead();    //Si no ha terminado, avanza
             } else if(!this.isArrivalRegistred(trackLane.getCarDriver())) {         //Si ya termino y no esta registrado, se registra la posicion de llegada.
                 this.driversMapByArrival.put(++this.finalPosition, trackLane.getCarDriver());    
             }
-        });
+        }
     }
     
     public boolean isGameFinished() {
@@ -171,6 +171,12 @@ public class GameController {
             podiumRegistred = true;
         }
         return(podiumRegistred);
+    }
+
+    public void resetCurrentGame() {
+        for(TrackLane trackLane: this.currentRaceTrack.getTrackLanesList()) {
+            trackLane.getCarDriver().getVehicle().setCurrentDistance(0);
+        }
     }
     
 }
