@@ -4,20 +4,16 @@ package dev.j3c.controller;
 import dev.j3c.domain.*;
 import dev.j3c.model.DBController;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
 
 public class GameController {
     private RaceTrack currentRaceTrack;
     private DBController DBControl;
-    private Map<Integer,CarDriver> driversMapByArrival;
     private int finalPosition; 
     //listo!
     public GameController(){
         this.DBControl = new DBController();
-        this.driversMapByArrival = new HashMap<>();
         this.finalPosition = 0;
     }
     
@@ -124,13 +120,10 @@ public class GameController {
         return(trackLanesList);
     }
 
-    private boolean isArrivalRegistred(CarDriver theCarDriver) {
+    private boolean isArrivalRegistred(TrackLane theTrackLane) {
         boolean registred = false;
-        for(Map.Entry<Integer, CarDriver> entry : this.driversMapByArrival.entrySet()) {
-            if(entry.getValue().equals(theCarDriver)){
-                registred = true;
-                break;
-            }
+        if(theTrackLane.getFinalPosition() != -1){
+            registred = true;
         }
         return(registred);
     }
@@ -140,8 +133,8 @@ public class GameController {
         for(TrackLane trackLane : this.currentRaceTrack.getTrackLanesList()) {
             if(trackLane.getCarDriver().getVehicle().getCurrentDistance() < this.currentRaceTrack.getTrackLanesLength()){
                 trackLane.getCarDriver().getVehicle().goAhead();    //Si no ha terminado, avanza
-            } else if(!this.isArrivalRegistred(trackLane.getCarDriver())) {         //Si ya termino y no esta registrado, se registra la posicion de llegada.
-                this.driversMapByArrival.put(++this.finalPosition, trackLane.getCarDriver());    
+            } else if(!this.isArrivalRegistred(trackLane)) {         //Si ya termino y no esta registrado, se registra la posicion de llegada.
+                trackLane.setFinalPosition(this.finalPosition++);    
             }
         }
     }
@@ -149,7 +142,7 @@ public class GameController {
     public boolean isGameFinished() {
         boolean gameFinished = true;
         for(TrackLane trackLane : this.currentRaceTrack.getTrackLanesList()){
-            if(trackLane.getCarDriver().getVehicle().getCurrentDistance() < this.currentRaceTrack.getTrackLanesLength()) {
+            if(trackLane.getFinalPosition() == -1) {
                 gameFinished = false;
                 break;
             }
@@ -157,15 +150,21 @@ public class GameController {
         return(gameFinished);
     }
 
-    public Map<Integer, CarDriver> getDriversResultList() {
-        return(this.driversMapByArrival);
+    private CarDriver getDriverByFinalPosition(int finalPosition){
+        CarDriver carDriver = null;
+        for(TrackLane trackLane : this.currentRaceTrack.getTrackLanesList()){
+            if(trackLane.getFinalPosition() == finalPosition) {
+                carDriver = trackLane.getCarDriver();
+            }
+        }
+        return (carDriver);
     }
-
+    
     public boolean constructCurrentPodium() {
         boolean podiumRegistred = false;
-        CarDriver firstPositionDriver = this.driversMapByArrival.get(1);
-        CarDriver secondPositionDriver = this.driversMapByArrival.get(2);
-        CarDriver thirdPositionDriver = this.driversMapByArrival.get(3);
+        CarDriver firstPositionDriver = this.getDriverByFinalPosition(1);
+        CarDriver secondPositionDriver = this.getDriverByFinalPosition(2);
+        CarDriver thirdPositionDriver = this.getDriverByFinalPosition(3);
         int raceLength = this.currentRaceTrack.getTrackLanesLength();
         if(this.DBControl.addNewPodium(firstPositionDriver, secondPositionDriver, thirdPositionDriver, raceLength)){
             podiumRegistred = true;

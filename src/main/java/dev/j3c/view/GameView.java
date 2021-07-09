@@ -151,9 +151,8 @@ public class GameView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                        .addComponent(jButtonNewGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonGameRepeat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(jButtonNewGame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonGoAhead, javax.swing.GroupLayout.PREFERRED_SIZE, 191, Short.MAX_VALUE))
                 .addGap(99, 99, 99)
                 .addComponent(jButtonHelp)
@@ -180,7 +179,8 @@ public class GameView extends javax.swing.JFrame {
                     .addComponent(jButtonPodiumsHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonDriversHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,7 +191,9 @@ public class GameView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,19 +205,16 @@ public class GameView extends javax.swing.JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
-    private void showDriversAdvances(){ 
+    private void showDriversAdvances() { 
         String estadoActualCarrera = "";
         for(TrackLane tr : this.gameController.getCurrentRaceTrack().getTrackLanesList()){
-            estadoActualCarrera += tr.getCarDriver().getName() + "\n";
-            estadoActualCarrera += tr.getCarDriver().getNationality() + "\n";
-            estadoActualCarrera += tr.getCarDriver().getVehicle().getBrand() + " " + tr.getCarDriver().getVehicle().getModel()+ "\n";
-            estadoActualCarrera += tr.getCarDriver().getVehicle().getCurrentDistance()+ "\n\n";
+            estadoActualCarrera += tr.getCarDriver().getName() + "  ";
+            estadoActualCarrera += tr.getCarDriver().getNationality() + "  ";
+            estadoActualCarrera += tr.getCarDriver().getVehicle().getBrand() + "  " + tr.getCarDriver().getVehicle().getModel() + "\n";
+            estadoActualCarrera += "Distancia Recorrida: " + tr.getCarDriver().getVehicle().getCurrentDistance() + "\n\n";
         }
-        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + estadoActualCarrera);
-    }
-    
-    private void cleanUpTable() {
-        
+        RaceStatusWindow raceStatusWindowdow = new RaceStatusWindow(estadoActualCarrera);
+        raceStatusWindowdow.setVisible(true);
     }
     
     private void createRaceTrack(){
@@ -225,9 +224,7 @@ public class GameView extends javax.swing.JFrame {
         RaceTrack newRaceTrack = new RaceTrack(raceLength, trackLanesList);
         this.gameController.setCurrentRaceTrack(newRaceTrack); 
     }
-    
-    
-    
+ 
     private void jButtonNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewGameActionPerformed
         int confirm = 0;
         if(this.gameStatus != 0) { 
@@ -239,22 +236,13 @@ public class GameView extends javax.swing.JFrame {
             this.jButtonGoAhead.setEnabled(true);
             this.jButtonCurrentGameDrivers.setEnabled(true);
             this.createRaceTrack();
-            this.cleanUpTable();
         }
     }//GEN-LAST:event_jButtonNewGameActionPerformed
     
     private void jButtonCurrentGameDriversActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCurrentGameDriversActionPerformed
-        List<CarDriver> currentDriversList = new ArrayList<>();
-        for(TrackLane trackLane : this.gameController.getCurrentRaceTrack().getTrackLanesList()){
-            currentDriversList.add(trackLane.getCarDriver());
-        }
-        //DriversWindow currentDriversListWindow = new DriversWindow(currentDriversList, "lista de Corredores Para la Actual Carrera");
-        //currentDriversListWindow.setVisible(true);
-        String listaCorredores = "";
-        for(CarDriver cd : currentDriversList){
-            listaCorredores += cd.toString() + "\n";
-        }
-        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + listaCorredores);
+        List<TrackLane> currentDriversList = this.gameController.getCurrentRaceTrack().getTrackLanesList();
+        CurrentDriversWindow currentDriversWindow = new CurrentDriversWindow(currentDriversList);
+        currentDriversWindow.setVisible(true);
     }//GEN-LAST:event_jButtonCurrentGameDriversActionPerformed
 
     private void jButtonGameRepeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGameRepeatActionPerformed
@@ -267,7 +255,6 @@ public class GameView extends javax.swing.JFrame {
             this.jButtonGoAhead.setEnabled(true);
             this.jButtonCurrentGameDrivers.setEnabled(true);
             this.gameController.resetCurrentGame();
-            this.cleanUpTable();
         }
     }//GEN-LAST:event_jButtonGameRepeatActionPerformed
 
@@ -284,7 +271,7 @@ public class GameView extends javax.swing.JFrame {
             this.jButtonCurrentGameDrivers.setEnabled(false);
             this.gameStatus = 0;
             if(this.gameController.constructCurrentPodium()) {
-                PodiumWindow podiumWindow = new PodiumWindow(this.gameController.getDriversResultList());
+                PodiumWindow podiumWindow = new PodiumWindow(this.gameController.getCurrentRaceTrack().getTrackLanesList());
                 podiumWindow.setVisible(true);
             }    
         }
@@ -292,14 +279,9 @@ public class GameView extends javax.swing.JFrame {
 
     private void jButtonDriversHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDriversHistoryActionPerformed
         List<CarDriver> carDriversFullList = this.gameController.getFullListCarDrivers();
-        //DriversWindow historyDriversListWindow = new DriversWindow(carDriversFullList, "Lista Completa de Corredores en el Sistema");
-        //historyDriversListWindow.setVisible(true);
-        
-        String listaCorredores = "";
-        for(CarDriver cd : carDriversFullList){
-            listaCorredores += cd.toString() + "\n";
-        }
-        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + listaCorredores);
+        System.out.println("*******" + carDriversFullList.size());
+        DriversHistoryWindow driversHistoryWindow = new DriversHistoryWindow(carDriversFullList);
+        driversHistoryWindow.setVisible(true);
     }//GEN-LAST:event_jButtonDriversHistoryActionPerformed
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
@@ -321,21 +303,8 @@ public class GameView extends javax.swing.JFrame {
 
     private void jButtonPodiumsHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPodiumsHistoryActionPerformed
         List<Podium> podiumsFullList =  this.gameController.getFullListPodiums();
-        
-        //PodiumsHistoryWindow podiumsWindow = new PodiumsHistoryWindow(podiumsFullList);
-        //podiumsWindow.setVisible(true);
-        String listaPodiums = "";
-        int i = 0;
-        for(Podium pd : podiumsFullList){
-            listaPodiums += "Primer puesto: " + pd.getListaGanadores()[i].getName()+ pd.getListaGanadores()[i].getNationality()+ "\n";
-            i++;
-            listaPodiums += "Segundo puesto puesto: " + pd.getListaGanadores()[i].getName() + pd.getListaGanadores()[i].getNationality() + "\n";
-            i++;
-            listaPodiums += "Tercer puesto: " + pd.getListaGanadores()[i].getName() + pd.getListaGanadores()[i].getNationality() + "\n";
-            i = 0;
-            listaPodiums += "\n\n";
-        }
-        JOptionPane.showMessageDialog(this,"Lista de corredores en el juego actual\n\n" + listaPodiums);
+        PodiumsWindow podiumsWindow = new PodiumsWindow(podiumsFullList);
+        podiumsWindow.setVisible(true);
     }//GEN-LAST:event_jButtonPodiumsHistoryActionPerformed
 
     public static void main(String args[]) {

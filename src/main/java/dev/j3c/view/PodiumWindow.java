@@ -2,18 +2,22 @@
 package dev.j3c.view;
 
 import dev.j3c.domain.CarDriver;
-import java.util.HashMap;
-import java.util.Map;
+import dev.j3c.domain.TrackLane;
+import java.util.List;
 
 public class PodiumWindow extends javax.swing.JFrame {
     
-    private HashMap<Integer,CarDriver> driversResultMap;
+    private List<TrackLane> driversResultList;
     
-    public PodiumWindow(Map<Integer, CarDriver> driversResultList) {
+    public PodiumWindow(List<TrackLane> driversResultList) {
         super("Resultados Finales");
         initComponents();
-        this.driversResultMap = (HashMap<Integer,CarDriver>) driversResultList;
+        this.driversResultList = (List<TrackLane>) driversResultList;
         this.configWindow();
+        System.out.println("**********************" + driversResultList.size());
+        for(TrackLane tr : this.driversResultList){
+            System.out.println(tr.getCarDriver() + "    Final position: " + tr.getFinalPosition());
+        }
         this.setFinalPodium();
         this.setRestOfFinalPositions();
     }
@@ -26,11 +30,11 @@ public class PodiumWindow extends javax.swing.JFrame {
     }
     
     private void setRestOfFinalPositions() {
-        if(this.driversResultMap.size() > 3){
+        if(this.driversResultList.size() > 3){
             this.jTextAreaRestOfDrivers.setText("\t\tResultados de los otros corredores:\n\n");
-            for(int i = 4 ; i < this.driversResultMap.size() ; i++){
-                this.jTextAreaRestOfDrivers.append(this.driversResultMap.get(i).toString() + "\n");
-                this.jTextAreaRestOfDrivers.append(this.driversResultMap.get(i).getVehicle().toString() + "\n\n");
+            for(int i = 3 ; i < this.driversResultList.size() ; i++){
+                this.jTextAreaRestOfDrivers.append(this.getParticipantData(i).toString() + "\n");
+                this.jTextAreaRestOfDrivers.append(this.getParticipantData(i).getVehicle().toString() + "\n\n");
             }
         } else {
             this.jTextAreaRestOfDrivers.setText("");
@@ -39,16 +43,25 @@ public class PodiumWindow extends javax.swing.JFrame {
         
     }
     
+    private CarDriver getParticipantData(int finalPosition){
+        CarDriver carDriver = null;
+        for(TrackLane trackLane : this.driversResultList){
+            if(trackLane.getFinalPosition() == finalPosition){
+                carDriver = trackLane.getCarDriver();
+            }
+        }
+        return(carDriver);
+    }
+    
     private void setFinalPodium(){
-        this.jLabelFirstPlaceDriver.setText(this.driversResultMap.get(1).toString());
-        this.jLabelFirstPlaceCar.setText(this.driversResultMap.get(1).getVehicle().toString());
+        this.jLabelFirstPlaceDriver.setText(this.getParticipantData(0).toString());
+        this.jLabelFirstPlaceCar.setText(this.getParticipantData(0).getVehicle().toString());
         
-        this.jLabelSecondPlaceDriver.setText(this.driversResultMap.get(2).toString());
-        this.jLabelSecondPlaceCar.setText(this.driversResultMap.get(2).getVehicle().toString());
+        this.jLabelSecondPlaceDriver.setText(this.getParticipantData(1).toString());
+        this.jLabelSecondPlaceCar.setText(this.getParticipantData(1).getVehicle().toString());
         
-        this.jLabelThirdPlaceDriver.setText(this.driversResultMap.get(3).toString());
-        this.jLabelThirdPlaceCar.setText(this.driversResultMap.get(3).getVehicle().toString());
-        
+        this.jLabelThirdPlaceDriver.setText(this.getParticipantData(2).toString());
+        this.jLabelThirdPlaceCar.setText(this.getParticipantData(2).getVehicle().toString());   
     }
     
     @SuppressWarnings("unchecked")
@@ -121,33 +134,32 @@ public class PodiumWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelThirdPlaceDriver)
-                                    .addComponent(jLabelThirdPlaceCar)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelFirstPlaceDriver)
-                                    .addComponent(jLabelFirstPlaceCar)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelSecondPlaceDriver)
-                                    .addComponent(jLabelSecondPlaceCar)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabelThirdPlaceDriver)
+                            .addComponent(jLabelThirdPlaceCar)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(jLabel8)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFirstPlaceDriver)
+                            .addComponent(jLabelFirstPlaceCar)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelSecondPlaceDriver)
+                            .addComponent(jLabelSecondPlaceCar)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(326, 326, 326))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

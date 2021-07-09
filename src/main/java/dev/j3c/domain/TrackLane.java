@@ -27,6 +27,16 @@ public class TrackLane {
         return (this.trackLaneNumber);
     }
 
+    public int getFinalPosition() {
+        return this.finalPosition;
+    }
+
+    public void setFinalPosition(int finalPosition) {
+        this.finalPosition = finalPosition;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "TrackLane{" + "carDriver=" + carDriver + '}';
