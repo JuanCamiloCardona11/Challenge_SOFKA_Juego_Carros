@@ -1,9 +1,7 @@
 
 package dev.j3c.view;
 
-import dev.j3c.domain.CarDriver;
 import dev.j3c.domain.TrackLane;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentDriversWindow extends javax.swing.JFrame {
@@ -35,9 +33,7 @@ public class CurrentDriversWindow extends javax.swing.JFrame {
             listaCorredores += "Modelo: " + trackLane.getCarDriver().getVehicle().getModel()+ "\n";
             listaCorredores += "Color: " + trackLane.getCarDriver().getVehicle().getColour()+ "\n\n";
         }
-        
         this.jTextAreaCurrDrivers.setText(listaCorredores);
-        
     }
     
     @SuppressWarnings("unchecked")

@@ -47,7 +47,7 @@ public class GameController {
             if(!this.DBControl.driverExists(driverUsername)){
                 validUsername = true;
             } else {
-                JOptionPane.showMessageDialog(null, "El corredor con nombre de usuario: " + driverUsername + " ya se encuentra registrado en el sistema, intente con uno nuevo la siguiente vez.","Nombre de Usuario Existente.", 2);
+                JOptionPane.showMessageDialog(null, "El corredor con nombre de usuario: " + driverUsername + " ya se encuentra registrado en el sistema, intente con uno nuevo la siguiente vez.","Nombre de Usuario Existente.",0);
             }
         } else {
             JOptionPane.showMessageDialog(null, "El nombre de usuario debe tener el formato ^[a-z0-9_-]{3,50}$.","Formato invalido", 0);
@@ -74,7 +74,7 @@ public class GameController {
         Vehicle vehicle = new Vehicle(brand, colour, model);
         CarDriver carDriver = new CarDriver(driverUsername, name, vehicle, nationality);
         if(this.DBControl.addCarDriver(carDriver)){
-            JOptionPane.showMessageDialog(null, "El nuevo corredor ha sido ingresado exitosamente.","Ingreso Exitoso", 0);
+            JOptionPane.showMessageDialog(null, "El nuevo corredor ha sido ingresado exitosamente.","Ingreso Exitoso", 1);
         } else {
             JOptionPane.showMessageDialog(null, "Error al intentar ingresar el nuevo corredor.","Error en el Ingreso", 0);
         }
@@ -88,7 +88,7 @@ public class GameController {
                 lengthKM = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese una cantidad entera para la distancia a recorrer (en kilometros)","Longitud de la Carrera",3));
                 if(lengthKM <= 0) JOptionPane.showMessageDialog(null, "La longitud ingresada es invalida, las carreras son de minimo 1 kilometro.","Longitud invalida",2);
             } catch(NumberFormatException ex1) {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",2);
+                JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",0);
             }
         }
         return(lengthKM * 1000);
@@ -103,7 +103,7 @@ public class GameController {
                 if(numDrivers < 3) JOptionPane.showMessageDialog(null, "Numero de corredores invalido, se requieren minimo 3.","Numero de Corredores Invalido",2);
                 if(numDrivers > 20) JOptionPane.showMessageDialog(null, "Numero de corredores invalido, se requieren maximo 20.","Numero de Corredores Invalido",2);
             } catch(NumberFormatException ex1) {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",2);
+                JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",0);
             }
         }
         return(numDrivers);
@@ -162,9 +162,9 @@ public class GameController {
     
     public boolean constructCurrentPodium() {
         boolean podiumRegistred = false;
-        CarDriver firstPositionDriver = this.getDriverByFinalPosition(1);
-        CarDriver secondPositionDriver = this.getDriverByFinalPosition(2);
-        CarDriver thirdPositionDriver = this.getDriverByFinalPosition(3);
+        CarDriver firstPositionDriver = this.getDriverByFinalPosition(0);
+        CarDriver secondPositionDriver = this.getDriverByFinalPosition(1);
+        CarDriver thirdPositionDriver = this.getDriverByFinalPosition(2);
         int raceLength = this.currentRaceTrack.getTrackLanesLength();
         if(this.DBControl.addNewPodium(firstPositionDriver, secondPositionDriver, thirdPositionDriver, raceLength)){
             podiumRegistred = true;

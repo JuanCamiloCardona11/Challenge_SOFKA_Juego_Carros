@@ -4,7 +4,6 @@ package dev.j3c.view;
 import dev.j3c.controller.GameController;
 import dev.j3c.domain.*;
 import javax.swing.JOptionPane;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends javax.swing.JFrame {
@@ -295,7 +294,7 @@ public class GameView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     private void jButtonInputNewDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInputNewDriverActionPerformed
-        String driverUsername = JOptionPane.showInputDialog(this,"Ingrese el nombre de usuario que tendra el nuevo corredor : ","Ingreso de Nuevo Corredor",3);
+        String driverUsername = JOptionPane.showInputDialog(this,"Ingrese el nombre de usuario que tendra el nuevo corredor: ","Ingreso de Nuevo Corredor",3);
         if(this.gameController.validateNewUsername(driverUsername)){
             this.gameController.getNewDriverData(driverUsername);
         }

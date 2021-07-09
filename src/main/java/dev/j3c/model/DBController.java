@@ -230,7 +230,7 @@ public class DBController{
             PreparedStatement prepStmt;
             try {
                 prepStmt = conn.prepareStatement("INSERT INTO podiums (competition_length, first_place_name, first_place_nationality, second_place_name, second_place_nationality, third_place_name, third_place_nationality) VALUES (?,?,?,?,?,?,?)");
-                prepStmt.setInt(1, raceLength);
+                prepStmt.setInt(1, raceLength/1000);
                 prepStmt.setString(2, firstPositionDriver.getName());               
                 prepStmt.setString(3, firstPositionDriver.getNationality());
                 prepStmt.setString(4, secondPositionDriver.getName());               
