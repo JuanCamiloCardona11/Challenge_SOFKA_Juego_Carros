@@ -188,11 +188,7 @@ public class GameController {
     public void resetCurrentGame() {
         for(TrackLane trackLane: this.currentRaceTrack.getTrackLanesList()) {
             trackLane.getCarDriver().getVehicle().setCurrentDistance(0);
+            trackLane.setFinalPosition(-1);
         }
     }
-    
-//    public int getNumberOfDrivers() {
-//        return(this.DBControl.getNumberOfDrivers());
-//    }
-    
 }

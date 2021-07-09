@@ -166,6 +166,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="/Users/administrator/Desktop/Cursos Desarrollo y BDD/AppJuegoCarros/src/main/java/dev/j3c/assets/Car-Button.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Haz click aqui para avanzar los vehiculos!"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -192,6 +193,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="/Users/administrator/Desktop/Cursos Desarrollo y BDD/AppJuegoCarros/src/main/java/dev/j3c/assets/Info-Button.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Haz click aqui para mostrar un instructivo de funcionamiento"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonHelpActionPerformed"/>

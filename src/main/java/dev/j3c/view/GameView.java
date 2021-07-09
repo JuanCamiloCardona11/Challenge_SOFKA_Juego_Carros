@@ -67,6 +67,7 @@ public class GameView extends javax.swing.JFrame {
         });
 
         jButtonGoAhead.setIcon(new javax.swing.ImageIcon("/Users/administrator/Desktop/Cursos Desarrollo y BDD/AppJuegoCarros/src/main/java/dev/j3c/assets/Car-Button.png")); // NOI18N
+        jButtonGoAhead.setToolTipText("Haz click aqui para avanzar los vehiculos!");
         jButtonGoAhead.setEnabled(false);
         jButtonGoAhead.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +86,7 @@ public class GameView extends javax.swing.JFrame {
         });
 
         jButtonHelp.setIcon(new javax.swing.ImageIcon("/Users/administrator/Desktop/Cursos Desarrollo y BDD/AppJuegoCarros/src/main/java/dev/j3c/assets/Info-Button.png")); // NOI18N
+        jButtonHelp.setToolTipText("Haz click aqui para mostrar un instructivo de funcionamiento");
         jButtonHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonHelpActionPerformed(evt);
