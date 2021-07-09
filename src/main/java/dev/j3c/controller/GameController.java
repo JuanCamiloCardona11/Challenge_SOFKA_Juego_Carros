@@ -4,7 +4,9 @@ package dev.j3c.controller;
 import dev.j3c.domain.*;
 import dev.j3c.model.DBController;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class GameController {
@@ -88,26 +90,48 @@ public class GameController {
     
     public int inputNumberOfDrivers() {
         int numDrivers = -1;
-        while(numDrivers < 3 || numDrivers > 20) {
+        while(numDrivers < 3 || numDrivers > this.DBControl.getNumberOfDrivers()) {
             try {
-                numDrivers = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la cantidad de juegadores mayor o igual que 3 y menor o igual a 20.","Cantidad de Corredores",3));
+                numDrivers = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la cantidad de juegadores mayor o igual que 3 y menor o igual a " + this.DBControl.getNumberOfDrivers() + ": ","Cantidad de Corredores",3));
                 if(numDrivers < 3) JOptionPane.showMessageDialog(null, "Numero de corredores invalido, se requieren minimo 3.","Numero de Corredores Invalido",2);
-                if(numDrivers > 20) JOptionPane.showMessageDialog(null, "Numero de corredores invalido, se requieren maximo 20.","Numero de Corredores Invalido",2);
-            } catch(NumberFormatException ex1) {
+                if(numDrivers > 20) JOptionPane.showMessageDialog(null, "Numero de corredores invalido, se requieren maximo " + this.DBControl.getNumberOfDrivers(),"Numero de Corredores Invalido",2);
+            } catch(NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numerica entera.","Formato de Dato Incorrecto",0);
             }
         }
         return(numDrivers);
     }
     
-    public List<TrackLane> getDriversData(int numDrivers){
-        List<TrackLane> trackLanesList = new ArrayList<>();
-        for(int i = 0 ; i < numDrivers ; i++){
-            CarDriver driver = DBControl.getRandomDriver();
-            TrackLane trackLane = new TrackLane(driver, (i + 1));
-            trackLanesList.add(trackLane);
+    private List<TrackLane> assignTrackLane(Set<CarDriver> carDriverSet) {
+        List<TrackLane> trackLaneList = new ArrayList<>();
+        int trackLaneNumber = 1;
+        for(CarDriver carDriver : carDriverSet){
+            TrackLane trackLane = new TrackLane(carDriver, trackLaneNumber++);
+            trackLaneList.add(trackLane);
         }
-        return(trackLanesList);
+        return(trackLaneList);
+    }
+    
+    private boolean driverIsSelected(String driverUsername, Set<CarDriver> carDriversSet){
+        boolean driverSelected = false;
+        for(CarDriver carDriver : carDriversSet) {
+            if(carDriver.getUsername().equals(driverUsername)) {
+                driverSelected = true;
+                break;
+            }
+        }
+        return(driverSelected);
+    }
+    
+    public List<TrackLane> getDriversData(int numDrivers){
+        Set<CarDriver> carDriversSet = new HashSet<>();
+        while(carDriversSet.size() < numDrivers) {
+            CarDriver driver = DBControl.getRandomDriver();
+            if(!this.driverIsSelected(driver.getUsername(), carDriversSet)) {
+                carDriversSet.add(driver);
+            }
+        }
+        return(this.assignTrackLane(carDriversSet));
     }
 
     private boolean isArrivalRegistred(TrackLane theTrackLane) {
@@ -166,5 +190,9 @@ public class GameController {
             trackLane.getCarDriver().getVehicle().setCurrentDistance(0);
         }
     }
+    
+//    public int getNumberOfDrivers() {
+//        return(this.DBControl.getNumberOfDrivers());
+//    }
     
 }

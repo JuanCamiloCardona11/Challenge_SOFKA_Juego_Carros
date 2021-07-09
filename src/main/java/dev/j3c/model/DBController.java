@@ -248,4 +248,25 @@ public class DBController{
         }
         return(podiumRegistred);        
     } 
+    
+    public int getNumberOfDrivers(){
+        int numberOfDrivers = -1;
+        if(DBConnection.connectBD()){
+            Connection conn = DBConnection.getBDConnection();
+            PreparedStatement prepStmt;
+            ResultSet result;
+            try{
+                prepStmt = conn.prepareStatement("SELECT COUNT(*) FROM drivers");
+                result = prepStmt.executeQuery();
+                if(result.next()) {
+                    numberOfDrivers = result.getInt(1);
+                }
+            } catch(SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al intentar obtener la informacion de todos los podios existentes en el sistema: \n" + ex.getMessage(),"Error en la Base de Datos", 0);
+            } finally {
+                DBConnection.disconnetBD();
+            }
+        }
+        return(numberOfDrivers);
+    }
 }
